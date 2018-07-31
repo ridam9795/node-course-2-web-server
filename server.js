@@ -1,6 +1,7 @@
 const express=require('express');
 const hbs=require('hbs');
 const fs=require('fs');
+const port=process.env.PORT || 3000;
 var app=express();
 app.set('view engine','hbs');
 hbs.registerPartials(__dirname + '/views/partials')
@@ -21,12 +22,12 @@ hbs.registerHelper('toUpperCase',(text)=>{
     return text.toUpperCase();
 })
 
-app.use((req,res,next)=>{
-res.render('maintainance.hbs',{
-    heading:"We will right back",
-    paragarph:"Site is being updated"
-});
-});
+// app.use((req,res,next)=>{
+// res.render('maintainance.hbs',{
+//     heading:"We will right back",
+//     paragarph:"Site is being updated"
+// });
+// });
 app.get('/',(req,res)=>{
     res.render('home.hbs',{
         welcomeMessage:"welcome to my website",
@@ -39,7 +40,12 @@ res.render('about.hbs',{
     heading:"About page",
 })
 });
-app.listen(3000, () => {
-    console.log('Server is up on port 3000');
+app.get('/project',(req,res)=>{
+    res.render('project.hbs',{
+        portfolio:"portfolio page here"
+    })
+})
+app.listen(port, () => {
+    console.log(`Server is up on port  ${port}`);
   });
   
